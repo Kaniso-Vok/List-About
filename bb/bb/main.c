@@ -15,24 +15,26 @@ int main()
 	SeqListPushBack(&test, 8);
 	SeqListPushBack(&test, 8);
 	SeqListPushBack(&test, 8);
-	//SeqListPushBack(&test, 4);
+	SeqListPushBack(&test, 4);
 	SeqListPushFront(&test, 8);
 	SeqListPushFront(&test, 9);
 	SeqListPushFront(&test, 10);
-	/*
-	SeqListPopFront(&test);
-	SeqListPopFront(&test);
-	SeqListPopFront(&test);
-	SeqListPopFront(&test);
-	SeqListPopBack(&test);
-	SeqListPopBack(&test);*/
-	SeqListRemoveAll(&test, 8);
+	
+	//SeqListPopFront(&test);
+	//SeqListPopFront(&test);
+	//SeqListPopFront(&test);
+	//SeqListPopFront(&test);
+	//SeqListPopBack(&test);
+	//SeqListPopBack(&test);
+	//SeqListRemoveAll(&test, 8);
 
-	//SeqListBubbleSort(&test);
+	SeqListBubbleSort(&test);
 
 	//SeqListErase(&test, SeqListBinaryFind(&test, 7));
 
 	SeqListPrint(&test);
 	SeqListDestory(&test);
+	SeqListPrint(&test);
+	system("pause");
 	return 0;
 }

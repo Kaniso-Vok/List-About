@@ -7,7 +7,16 @@ void SeqListInit(SeqList* psl, size_t capacity)//初始化
 	psl->capacity = capacity;
 	psl->size = 0;
 }
-void SeqListDestory(SeqList* psl);
+void SeqListDestory(SeqList* psl)
+{
+	if (psl->array)
+	{
+		free(psl->array);
+		psl->array = NULL;
+		psl->capacity = 0;
+		psl->size = 0;
+	}
+}
 
 void CheckCapacity(SeqList* psl)//检查和动态开辟
 {
@@ -31,9 +40,9 @@ void SeqListPushFront(SeqList* psl, SLDataType x)//首插
 {
 	int i;
 	CheckCapacity(psl);
-	for (i = 1; i < psl->size-1; i++)
+	for (i = psl->size - 1; i >= 0; i--)
 	{
-		psl->array[i] = psl->array[i - 1];
+		psl->array[i+1] = psl->array[i];
 		
 	}
 	psl->array[0] = x;
@@ -41,7 +50,7 @@ void SeqListPushFront(SeqList* psl, SLDataType x)//首插
 }
 void SeqListPopFront(SeqList* psl)//首删
 {
-	int i;
+	size_t i;
 	for (i = 0; i < psl->size-1; i++)
 	{
 		psl->array[i] = psl->array[i + 1];
@@ -51,7 +60,7 @@ void SeqListPopFront(SeqList* psl)//首删
 
 int SeqListFind(SeqList* psl, SLDataType x)//查询
 {
-	int i;
+	size_t i;
 	for (i = 0; i < psl->size - 1; i++)
 	{
 		if (psl->array[i] == x)
@@ -63,7 +72,7 @@ int SeqListFind(SeqList* psl, SLDataType x)//查询
 }
 void SeqListInsert(SeqList* psl, size_t pos, SLDataType x)//插入
 {
-	int i;
+	size_t i;
 	for (i=psl->size-1; i>=pos; i--)
 	{
 		psl->array[i+1] = psl->array[i];
@@ -73,7 +82,7 @@ void SeqListInsert(SeqList* psl, size_t pos, SLDataType x)//插入
 }
 void SeqListErase(SeqList* psl, size_t pos)//删除指定下标
 {
-	int i;
+	size_t i;
 	for (i = pos; i < psl->size - 1; i++)
 	{
 		psl->array[i] = psl->array[i + 1];
@@ -90,25 +99,30 @@ void SeqListModify(SeqList* psl, size_t pos, SLDataType x)
 }
 void SeqListPrint(SeqList* psl)
 {
-	int i;
-	for (i = 0; i < i < psl->size - 1; i++)
+	size_t i;
+	for (i = 0; i <=psl->size - 1; i++)
 	{
-		printf("%d->", psl->array[i]);
+		if (psl->array == NULL)
+		{
+			printf("NULL");
+			return;
+		}
+	    printf("%d->", psl->array[i]);
 	}
 	putchar('\n');
 }
 
 void SeqListBubbleSort(SeqList* psl)
 {
-	int i, j;
+	size_t i, j;
 	SLDataType tmp;
 	for (i = 0; i < psl->size - 1; i++)
 	{
-		for (j = 0; i < psl->size - 1; j++)
+		for (j = 0; j < psl->size - 1; j++)
 		{
-			if (psl->array[j]>psl->array[j + 1])
+			if (psl->array[j] > psl->array[j + 1])
 			{
-				psl->array[j] = tmp;
+				tmp = psl->array[j];
 				psl->array[j] = psl->array[j + 1];
 				psl->array[j + 1] = tmp;
 			}
@@ -117,6 +131,38 @@ void SeqListBubbleSort(SeqList* psl)
 }
 int SeqListBinaryFind(SeqList* psl, SLDataType x)
 {
-
+	int left = 0, right = psl->size;
+	int mid = (left + right) / 2;
+	while (left <= right)
+	{
+		if (x < psl->array[mid])
+		{
+			right = mid-1;
+		}
+		if (x>psl->array[mid])
+		{
+			left = mid+1;
+		}
+		else
+		{
+			return mid;
+		}
+	}
+	return -1;
 }
-void SeqListRemoveAll(SeqList* psl, SLDataType x);
+void SeqListRemoveAll(SeqList* psl, SLDataType x)
+{
+	size_t i, gap = 0;
+	for (i = 0; i < psl->size; i++)
+	{
+		if (psl->array[i] == x)
+		{
+			gap++;
+		}
+		else
+		{
+			psl->array[i - gap] = psl->array[i];
+		}
+	}
+	psl->size -= gap;
+}

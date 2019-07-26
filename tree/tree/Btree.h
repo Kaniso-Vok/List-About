@@ -14,5 +14,5 @@ BTNode* BinaryTreeCreate(BTDataType* a);
 void BinaryTreePrevOrder(BTNode* root);
 void BinaryTreeInOrder(BTNode* root);
 void BinaryTreePostOrder(BTNode* root);
-
+void BinaryTreePrevOrderNonR(BTNode* root);
 #endif

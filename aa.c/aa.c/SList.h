@@ -17,7 +17,7 @@ void SListPopFront(SListNode** phead);
 SListNode* SListFind(SListNode* phead, SLTDataType x);
 
 void SListInsertAfter(SListNode* pos, SLTDataType x);
-
+SListNode* SListFindMid(SListNode* phead);//查找中间位置
 void SListEraseAfter(SListNode* pos);
 void SListRemoveA(SListNode** phead, SLTDataType x);
 void SListPrint(SListNode* phead);

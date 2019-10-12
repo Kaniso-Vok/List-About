@@ -4,7 +4,7 @@
 #include<stdlib.h>
 int main()
 {
-	SListNode* head;
+	SListNode* head,* tmp;
 	SListInit(&head);
 	SListPushFront(&head, 3);
 	SListPushFront(&head, 3);
@@ -16,7 +16,8 @@ int main()
 	SListPushFront(&head, 2);
 	SListPushFront(&head, 1);
 	SListPrint(head);
-
+	tmp = SListFindMid(head);
+	printf("--%d--\n", tmp->data);
 	SListRemoveA(&head, 3);
 	SListPrint(head);
 
